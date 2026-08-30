@@ -126,7 +126,7 @@ export default function Dashboard() {
         </div>
 
         <div className="flex-1 overflow-auto">
-          <div className="p-4 md:p-6 space-y-6 max-w-[1400px]">
+          <div className="p-4 md:p-6 space-y-6 w-full max-w-[1400px] min-w-0">
             {/* Stats row */}
             <NeonPatternDefs colors={[...Object.values(STATUS_COLORS), ...Object.values(SEVERITY_COLORS)]} />
             <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-border rounded-md overflow-hidden">
@@ -198,7 +198,9 @@ export default function Dashboard() {
             {/* Table View */}
             {view === "table" && (
               <div className="border border-border rounded-md overflow-hidden">
-                <table className="w-full text-[13px]">
+                <div className="w-full overflow-x-auto">
+                <table className="w-full min-w-[560px] text-[13px]">
+
                   <thead>
                     <tr className="border-b border-border bg-muted/30">
                       <th className="text-left font-medium text-muted-foreground px-3 py-2">ID</th>
@@ -232,8 +234,10 @@ export default function Dashboard() {
                     )}
                   </tbody>
                 </table>
+                </div>
               </div>
             )}
+
 
             {/* Kanban View */}
             {view === "kanban" && (

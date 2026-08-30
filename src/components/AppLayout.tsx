@@ -9,10 +9,11 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen w-full overflow-x-hidden">
       <AppSidebar />
 
-      <div className="flex-1 flex flex-col min-w-0">
+      <div className="flex-1 flex flex-col min-w-0 w-full">
+
         {/* Mobile header */}
         <header className="sticky top-0 z-40 flex md:hidden items-center justify-between h-11 border-b border-border bg-background px-3">
           <Sheet open={open} onOpenChange={setOpen}>
@@ -34,7 +35,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
           <div className="w-7" />
         </header>
 
-        <main className="flex-1 overflow-auto">
+        <main className="flex-1 min-w-0 overflow-x-hidden overflow-y-auto">
           {children}
         </main>
       </div>
