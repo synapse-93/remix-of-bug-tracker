@@ -68,8 +68,8 @@ export default function BugList() {
         </div>
 
         {/* Filters bar */}
-        <div className="flex items-center gap-2 px-4 md:px-6 h-10 border-b border-border shrink-0">
-          <div className="relative flex-1 max-w-sm">
+        <div className="flex flex-wrap items-center gap-2 px-4 md:px-6 py-2 min-h-10 border-b border-border shrink-0">
+          <div className="relative flex-1 min-w-[180px] basis-full sm:basis-auto sm:max-w-sm">
             <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" />
             <Input
               placeholder="Search bugs..."
@@ -79,7 +79,8 @@ export default function BugList() {
             />
           </div>
           <Select value={statusFilter} onValueChange={setStatusFilter}>
-            <SelectTrigger className="w-[120px] h-7 text-[12px] border-none bg-transparent">
+            <SelectTrigger className="w-[calc(50%-0.25rem)] sm:w-[120px] h-7 text-[12px] border-none bg-transparent">
+
               <SelectValue placeholder="Status" />
             </SelectTrigger>
             <SelectContent>
@@ -92,7 +93,8 @@ export default function BugList() {
             </SelectContent>
           </Select>
           <Select value={severityFilter} onValueChange={setSeverityFilter}>
-            <SelectTrigger className="w-[120px] h-7 text-[12px] border-none bg-transparent">
+            <SelectTrigger className="w-[calc(50%-0.25rem)] sm:w-[120px] h-7 text-[12px] border-none bg-transparent">
+
               <SelectValue placeholder="Severity" />
             </SelectTrigger>
             <SelectContent>
@@ -108,8 +110,9 @@ export default function BugList() {
 
         {/* Table */}
         <div className="flex-1 overflow-auto">
-          <table className="w-full text-[13px]">
-            <thead className="sticky top-0 bg-background z-10">
+          <div className="w-full overflow-x-auto">
+          <table className="w-full min-w-[560px] text-[13px]">
+
               <tr className="border-b border-border">
                 <th className="text-left font-medium text-muted-foreground px-4 md:px-6 py-2">ID</th>
                 <th className="text-left font-medium text-muted-foreground px-3 py-2">Title</th>
