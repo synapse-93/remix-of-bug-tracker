@@ -233,10 +233,11 @@ function TeamTab() {
     <div className="divide-y divide-border">
       <div className="px-4 md:px-6 py-4">
         <p className="text-[12px] text-muted-foreground font-medium mb-3">Invite Team Member</p>
-        <div className="flex gap-2 max-w-lg">
-          <Input placeholder="colleague@company.com" value={inviteEmail} onChange={(e) => setInviteEmail(e.target.value)} className="h-8 text-[13px] flex-1" />
+        <div className="flex flex-col sm:flex-row gap-2 w-full max-w-lg">
+          <Input placeholder="colleague@company.com" value={inviteEmail} onChange={(e) => setInviteEmail(e.target.value)} className="h-8 text-[13px] flex-1 min-w-0" />
           <Select value={inviteRole} onValueChange={setInviteRole}>
-            <SelectTrigger className="w-[100px] h-8 text-[12px]"><SelectValue /></SelectTrigger>
+            <SelectTrigger className="w-full sm:w-[100px] h-8 text-[12px]"><SelectValue /></SelectTrigger>
+
             <SelectContent><SelectItem value="user">User</SelectItem><SelectItem value="moderator">Moderator</SelectItem><SelectItem value="admin">Admin</SelectItem></SelectContent>
           </Select>
           <Button onClick={handleInvite} disabled={sending || !inviteEmail} size="sm" className="h-8 text-[12px] gap-1">
@@ -377,10 +378,11 @@ function GeneralTab() {
     <div className="divide-y divide-border">
       <div className="px-4 md:px-6 py-4">
         <p className="text-[12px] text-muted-foreground font-medium mb-3">Appearance</p>
-        <div className="flex items-center justify-between max-w-lg">
+        <div className="flex items-center justify-between gap-3 w-full max-w-lg">
           <span className="text-[13px]">Theme</span>
           <Select value={theme} onValueChange={toggleTheme}>
-            <SelectTrigger className="w-[100px] h-7 text-[12px]"><SelectValue /></SelectTrigger>
+            <SelectTrigger className="w-[100px] shrink-0 h-7 text-[12px]"><SelectValue /></SelectTrigger>
+
             <SelectContent><SelectItem value="light">Light</SelectItem><SelectItem value="dark">Dark</SelectItem></SelectContent>
           </Select>
         </div>
