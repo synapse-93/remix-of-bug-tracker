@@ -125,7 +125,7 @@ export default function Analytics() {
 
         <div className="flex-1 overflow-auto">
           <NeonPatternDefs colors={[...Object.values(STATUS_COLORS), ...Object.values(SEVERITY_COLORS), "hsl(38, 92%, 50%)", "hsl(142, 70%, 40%)"]} />
-          <div className="p-4 md:p-6 space-y-6 max-w-[1400px]">
+          <div className="p-4 md:p-6 space-y-6 w-full max-w-[1400px] min-w-0">
             {/* Stats */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-border rounded-md overflow-hidden">
               {[
