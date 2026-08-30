@@ -1,0 +1,250 @@
+{
+  "version": 1,
+  "sdk_version": "0.26.2",
+  "path": "/functions/v1/mcp",
+  "auth": {
+    "type": "oauth",
+    "issuer": "https://gilgxaszyknetmsemvhw.supabase.co/auth/v1",
+    "accepted_audiences": [
+      "authenticated"
+    ]
+  },
+  "mcp": {
+    "server": {
+      "name": "triage",
+      "version": "0.1.0",
+      "title": "Triage"
+    },
+    "tools": [
+      {
+        "name": "list_bugs",
+        "title": "List bugs",
+        "description": "List bug reports in Triage, optionally filtered by status, severity, or a text search.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string",
+              "enum": [
+                "new",
+                "assigned",
+                "in_progress",
+                "testing",
+                "resolved",
+                "closed"
+              ],
+              "description": "Filter by bug status."
+            },
+            "severity": {
+              "type": "string",
+              "enum": [
+                "critical",
+                "high",
+                "medium",
+                "low"
+              ],
+              "description": "Filter by bug severity."
+            },
+            "search": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Case-insensitive match on the bug title."
+            },
+            "limit": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "description": "Max number of bugs to return (default 25)."
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_bug",
+        "title": "Get bug",
+        "description": "Fetch one bug by tracking ID (e.g. BUG-1234) or UUID, including its comments.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "bug": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Tracking ID or UUID of the bug."
+            }
+          },
+          "required": [
+            "bug"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "create_bug",
+        "title": "Create bug",
+        "description": "File a new bug report in Triage as the signed-in user.",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": false,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200,
+              "description": "Short summary of the bug."
+            },
+            "description": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 5000,
+              "description": "Detailed description of the issue."
+            },
+            "severity": {
+              "type": "string",
+              "enum": [
+                "critical",
+                "high",
+                "medium",
+                "low"
+              ],
+              "description": "Severity (defaults to medium)."
+            },
+            "steps_to_reproduce": {
+              "type": "string",
+              "maxLength": 5000
+            },
+            "expected_behavior": {
+              "type": "string",
+              "maxLength": 2000
+            },
+            "actual_behavior": {
+              "type": "string",
+              "maxLength": 2000
+            },
+            "environment": {
+              "type": "string",
+              "maxLength": 200,
+              "description": "e.g. Chrome 120, macOS 14"
+            }
+          },
+          "required": [
+            "title",
+            "description"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "update_bug",
+        "title": "Update bug",
+        "description": "Update the status, severity, or assignee of an existing bug in Triage.",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": false,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "bug": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Tracking ID or UUID of the bug."
+            },
+            "status": {
+              "type": "string",
+              "enum": [
+                "new",
+                "assigned",
+                "in_progress",
+                "testing",
+                "resolved",
+                "closed"
+              ]
+            },
+            "severity": {
+              "type": "string",
+              "enum": [
+                "critical",
+                "high",
+                "medium",
+                "low"
+              ]
+            },
+            "assignee_id": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "User id to assign, or null to unassign."
+            }
+          },
+          "required": [
+            "bug"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "add_comment",
+        "title": "Add comment",
+        "description": "Add a comment to a bug in Triage as the signed-in user.",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": false,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "bug": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Tracking ID or UUID of the bug."
+            },
+            "content": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 5000,
+              "description": "Comment text."
+            }
+          },
+          "required": [
+            "bug",
+            "content"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
