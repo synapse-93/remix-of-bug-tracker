@@ -230,7 +230,7 @@ var add_comment_default = defineTool5({
 });
 
 // src/lib/mcp/index.ts
-var projectRef = "gilgxaszyknetmsemvhw";
+var projectRef = "yptdnctgrqqsgtlvtfcn";
 var mcp_default = defineMcp({
   name: "triage",
   title: "Triage",
