@@ -112,6 +112,7 @@ export default function BugList() {
         <div className="flex-1 overflow-auto">
           <div className="w-full overflow-x-auto">
           <table className="w-full min-w-[560px] text-[13px]">
+            <thead className="sticky top-0 bg-background z-10">
 
               <tr className="border-b border-border">
                 <th className="text-left font-medium text-muted-foreground px-4 md:px-6 py-2">ID</th>
@@ -145,7 +146,9 @@ export default function BugList() {
               )}
             </tbody>
           </table>
+          </div>
         </div>
+
       </div>
     </AppLayout>
   );
